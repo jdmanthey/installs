@@ -1,0 +1,14 @@
+interactive -p quanah -c2
+
+cd /lustre/work/jmanthey/
+
+module load singularity
+
+export SINGULARITY_CACHEDIR="/lustre/work/jmanthey/singularity-cachedir"
+mkdir -p $SINGULARITY_CACHEDIR
+
+cd singularity-cachedir/
+
+# Create a Singularity container from a Docker container
+singularity pull docker://broadinstitute/gatk:4.2.3.0
+
