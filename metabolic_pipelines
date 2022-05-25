@@ -1,0 +1,20 @@
+# Cloning the development version of gapseq
+git clone https://github.com/jotech/gapseq
+cd gapseq
+
+# Create and activate a conda environment 
+conda env create -n metabolic --file gapseq_env.yml
+source activate metabolic
+
+# install one additional R-package
+R -e 'install.packages("CHNOSZ", repos="http://cran.us.r-project.org")'
+
+# Download & Install R-package 'sybilSBML'
+wget https://cran.r-project.org/src/contrib/Archive/sybilSBML/sybilSBML_3.1.2.tar.gz
+R CMD INSTALL --configure-args=" --with-sbml-include=$CONDA_PREFIX/include --with-sbml-lib=$CONDA_PREFIX/lib" sybilSBML_3.1.2.tar.gz
+rm sybilSBML_3.1.2.tar.gz
+
+# Download reference sequence data
+bash ./src/update_sequences.sh
+
+./gapseq test
