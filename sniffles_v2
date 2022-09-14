@@ -1,0 +1,5 @@
+conda create --name sniffles python=3.7
+
+source activate sniffles
+
+conda install sniffles=2.0
