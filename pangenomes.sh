@@ -1,7 +1,11 @@
 interactive -p quanah
 
-conda create --name pangenome python=3.9
+module load singularity
 
-source activate pangenome
+singularity pull docker://ghcr.io/pangenome/pggb:latest
 
-conda install -c bioconda pggb
+git clone --recursive https://github.com/pangenome/pggb.git
+
+cd pggb
+
+singularity run -B ${PWD}/data:/data ../pggb_latest.sif "pggb -i /data/HLA/DRB1-3123.fa.gz -p 70 -s 3000 -G 2000 -n 10 -t 16 -v -V 'gi|568815561:#' -o /data/out -M -m"
