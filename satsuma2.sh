@@ -1,5 +1,12 @@
-conda create --name satsuma python=3.11
+# install satsuma2
 
-source activate satsuma
+interactive -p nocona
 
-conda install -c bioconda satsuma2
+module load gcc cmake
+
+git clone https://github.com/bioinfologics/satsuma2.git
+cd satsuma2
+mkdir build && cd build
+cmake .. 
+make
+mv ./bin/* ../bin
